@@ -1,0 +1,13 @@
+Backend:
+- Python 3
+- Flask
+- pymongo
+
+Frontend:
+- Node.js
+- Express
+- Axios
+- EJS
+
+Process Manager:
+- PM2

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Item Manager</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #121212;
+      color: #fff;
+    }
+    .box {
+      width: 500px;
+      margin: 40px auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 4px;
+      border: none;
+    }
+    input {
+      background: #333;
+      color: #fff;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    .success {
+      color: #4caf50;
+      margin-top: 10px;
+    }
+    .error {
+      color: #ff5252;
+      margin-top: 10px;
+    }
+    ul {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Add Item</h2>
+
+  <form method="POST" action="/submit">
+    <input name="item_id" placeholder="Item ID" required />
+    <input name="name" placeholder="Item Name" required />
+    <input name="description" placeholder="Description" required />
+    <button>Add Item</button>
+  </form>
+
+  <hr>
+
+  <form method="GET" action="/items">
+    <button>View All Items</button>
+  </form>
+
+  <form method="GET" action="/count">
+    <button>Total Items</button>
+  </form>
+
+  <form method="POST" action="/find">
+    <input name="search_id" placeholder="Find by Item ID" required />
+    <button>Find Item</button>
+  </form>
+
+  <% if (result && result.item) { %>
+    <div class="success">
+      <p><b>ID:</b> <%= result.item.item_id %></p>
+      <p><b>Name:</b> <%= result.item.name %></p>
+      <p><b>Description:</b> <%= result.item.description %></p>
+    </div>
+  <% } %>
+
+  <% if (count !== null) { %>
+    <div class="success">Total Items: <%= count %></div>
+  <% } %>
+
+  <% if (items) { %>
+    <ul>
+      <% items.forEach(i => { %>
+        <li><b><%= i.item_id %></b> — <%= i.name %> : <%= i.description %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <% if (error) { %>
+    <div class="error"><%= error %></div>
+  <% } %>
+</div>
+
+</body>
+</html>
+
